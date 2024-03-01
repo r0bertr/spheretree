@@ -69,6 +69,8 @@ bool loadOBJ(Surface *sur, const char *fileName, float boxSize){
         break;
       }
 
+    if (buffer[i] == '#') continue;
+
     if (CAP(buffer[i]) == 'V' && buffer[i+1] == ' '){
       //  do new VERTEX
       float x, y, z;
@@ -88,13 +90,18 @@ bool loadOBJ(Surface *sur, const char *fileName, float boxSize){
         const char *token = strtok(j == 0 ? (buffer+i+1) : NULL, " ");
 
         //  decode token
-        int a = 0, b = 0, c = 0;
-        if (token == NULL ||
-            (sscanf(token, "%d/%d/%d", &a, &b, &c) != 3  &&
-             sscanf(token, "%d//%d", &a, &c) != 2)){
+        // int a = 0, b = 0, c = 0;
+        // if (token == NULL ||
+        //     (sscanf(token, "%d/%d/%d", &a, &b, &c) != 3  &&
+        //      sscanf(token, "%d//%d", &a, &c) != 2)){
+        //   fclose(f);
+        //   return false;
+        //   }
+        int a = 0;
+        if (token == NULL || sscanf(token, "%d", &a) != 1) {
           fclose(f);
           return false;
-          }
+        }
 
         tri->v[j] = a-1;
         tri->f[j] = -1;      //  neighbouring face not given in OBJ
