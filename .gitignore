@@ -1,0 +1,12 @@
+*.o
+*.cache
+*.log
+*.status
+lib*
+*.lo
+Makefile
+src/makeTreeGrid
+src/makeTreeHubbard
+src/makeTreeMedial
+src/makeTreeOctree
+src/makeTreeSpawn
